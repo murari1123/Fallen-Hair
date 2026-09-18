@@ -1,0 +1,427 @@
+/* ============================================
+   FALLEN HAIR — Hero Styles
+   High-End Editorial / Luxury Creative Studio
+   Alabaster canvas · Charcoal typography · Rosewood accent
+   ============================================ */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-24) var(--container-padding) var(--space-8);
+  overflow: visible;
+  background-color: transparent;
+}
+
+/* 1. Film Grain Atmosphere Layer */
+.filmGrain {
+  position: absolute;
+  inset: -30% -50% -50% -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+/* 2. Ambient Light & Shadows Layer */
+.ambientGlow {
+  position: absolute;
+  inset: -20% 0 -30% 0;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glowCore {
+  position: absolute;
+  width: min(85vw, 850px);
+  height: min(85vh, 600px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(221, 213, 205, 0.45) 0%,
+    rgba(241, 236, 230, 0.2) 50%,
+    transparent 75%
+  );
+  filter: blur(70px);
+}
+
+.glowRedAccent {
+  position: absolute;
+  width: 460px;
+  height: 360px;
+  background: radial-gradient(
+    circle at center,
+    rgba(125, 64, 71, 0.035) 0%,
+    transparent 75%
+  );
+  filter: blur(80px);
+  top: 35%;
+  right: 22%;
+}
+
+/* 3. Massive Ghost Watermark (Deep continuous layer) */
+.ghostWatermark {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  font-family: var(--font-heading);
+  font-size: clamp(9rem, 24vw, 28rem);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tightest);
+  text-transform: uppercase;
+  color: rgba(46, 46, 46, 0.028);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* 4. Subtle Editorial Grid & Coordinate Marks */
+.editorialGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  padding: var(--space-8) var(--space-8);
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+.editorialMark {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0.55;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.markTopLeft {
+  top: var(--space-24);
+  left: var(--container-padding);
+}
+
+.markTopRight {
+  top: var(--space-24);
+  right: var(--container-padding);
+  text-align: right;
+}
+
+.markBottomLeft {
+  bottom: var(--space-12);
+  left: var(--container-padding);
+}
+
+.markBottomRight {
+  bottom: var(--space-12);
+  right: var(--container-padding);
+  text-align: right;
+}
+
+.markCode {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  color: var(--muted);
+}
+
+.markLabel {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.crosshair {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: rgba(46, 46, 46, 0.25);
+  line-height: 1;
+}
+
+/* Faint Guide Lines */
+.guideLineHoriz {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(46, 46, 46, 0.05) 20%,
+    rgba(46, 46, 46, 0.05) 80%,
+    transparent 100%
+  );
+}
+
+.guideLineVert {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(46, 46, 46, 0.04) 20%,
+    rgba(46, 46, 46, 0.04) 80%,
+    transparent 100%
+  );
+}
+
+/* 5. Main Content Block */
+.content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-6);
+  max-width: 960px;
+  will-change: transform, opacity;
+}
+
+.overlineContainer {
+  overflow: hidden;
+}
+
+/* Overline */
+.overline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Title — Dominant Centerpiece */
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin: var(--space-2) 0;
+  user-select: none;
+}
+
+.titleLine {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: clamp(3.75rem, 8.5vw, 8.5rem);
+  font-weight: var(--weight-light);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-tightest);
+  text-transform: uppercase;
+  color: var(--charcoal);
+  will-change: transform;
+}
+
+/* Interactive Split Letters */
+.charWrapper {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.06em;
+}
+
+.char {
+  display: inline-block;
+  will-change: transform, color;
+  color: var(--charcoal);
+  cursor: default;
+}
+
+/* Accent Dot — High-End Rosewood Touch */
+.dotWrapper {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-left: 0.04em;
+}
+
+.accentDot {
+  display: inline-block;
+  color: var(--rosewood);
+  font-size: 1.05em;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(125, 64, 71, 0.45);
+  cursor: pointer;
+  will-change: transform, color;
+}
+
+/* Subtitle */
+.subtitleContainer {
+  overflow: hidden;
+}
+
+.subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--charcoal);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.alias {
+  font-weight: var(--weight-light);
+  color: var(--muted);
+}
+
+/* Minimal Divider */
+.divider {
+  width: 48px;
+  height: 1px;
+  background: var(--color-border);
+  transform-origin: center;
+}
+
+/* Tagline */
+.taglineContainer {
+  overflow: hidden;
+}
+
+.tagline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.dot {
+  font-size: 0.5rem;
+  color: var(--warm-greige);
+}
+
+/* 6. Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 3;
+}
+
+.scrollLabel {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(
+    to bottom,
+    var(--muted) 0%,
+    rgba(46, 46, 46, 0.1) 100%
+  );
+  animation: scrollPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  40% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 0.8;
+  }
+  60% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .titleLine {
+    font-size: clamp(3rem, 10vw, 6rem);
+  }
+
+  .editorialMark {
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-6);
+  }
+
+  .titleLine {
+    font-size: clamp(2.5rem, 12vw, 4.5rem);
+    line-height: 1;
+  }
+
+  .tagline {
+    flex-direction: row;
+    gap: var(--space-2);
+    font-size: 0.625rem;
+  }
+
+  .editorialGrid {
+    padding: var(--space-4);
+  }
+
+  .markTopLeft,
+  .markTopRight {
+    top: var(--space-16);
+  }
+
+  .markBottomLeft,
+  .markBottomRight {
+    display: none;
+  }
+
+  .ghostWatermark {
+    font-size: clamp(6rem, 28vw, 14rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollLine {
+    animation: none;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,114 @@
+/* ============================================
+   FALLEN HAIR — JIGS Global Floating Launcher
+   Editorial persistent launcher mounted at viewport edge.
+   Architectural, restrained, minimal studio mark.
+   Palette: Deep Espresso (#171615) · Alabaster (#F1ECE6) · Rosewood (#7D4047)
+   ============================================ */
+
+.launcher {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 35;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  min-height: 40px;
+  background-color: rgba(23, 22, 21, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(241, 236, 230, 0.16);
+  border-radius: 0;
+  color: var(--alabaster, #F1ECE6);
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 1px rgba(241, 236, 230, 0.15);
+  transition:
+    border-color var(--duration-base, 300ms) var(--ease-out, ease-out),
+    background-color var(--duration-base, 300ms) var(--ease-out, ease-out),
+    transform var(--duration-base, 300ms) var(--ease-out, ease-out),
+    box-shadow var(--duration-base, 300ms) var(--ease-out, ease-out),
+    opacity var(--duration-fast, 150ms) ease;
+  touch-action: manipulation;
+}
+
+.launcher:hover {
+  border-color: rgba(241, 236, 230, 0.35);
+  background-color: rgba(28, 27, 26, 0.96);
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.6),
+    0 0 1px rgba(241, 236, 230, 0.25);
+}
+
+.launcher:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.launcher:focus-visible {
+  outline: 2px solid var(--rosewood, #7D4047);
+  outline-offset: 3px;
+}
+
+/* Status Dot matching JIGS Header */
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--rosewood, #7D4047);
+  box-shadow: 0 0 6px rgba(125, 64, 71, 0.7);
+  flex-shrink: 0;
+}
+
+/* Title: "JIGS" */
+.launcherTitle {
+  font-family: var(--font-mono, 'SF Mono', 'Fira Code', Menlo, monospace);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold, 700);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--alabaster, #F1ECE6);
+  line-height: 1;
+}
+
+/* Sub: "// STUDIO ASSISTANT" */
+.launcherSub {
+  font-family: var(--font-mono, 'SF Mono', 'Fira Code', Menlo, monospace);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted, #8A8278);
+  line-height: 1;
+  transition: color var(--duration-fast, 150ms) ease;
+}
+
+.launcher:hover .launcherSub {
+  color: var(--warm-greige, #B8B0A5);
+}
+
+/* State when JIGS dialogue is open: hide launcher to yield focus to modal */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  visibility: hidden;
+}
+
+/* Mobile viewport adjustments */
+@media (max-width: 640px) {
+  .launcher {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 14px;
+    min-height: 44px; /* Accessible touch target size */
+    gap: 8px;
+  }
+
+  .launcherSub {
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+  }
+}

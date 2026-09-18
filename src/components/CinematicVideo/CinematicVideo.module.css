@@ -1,0 +1,472 @@
+/* ============================================
+   FALLEN HAIR — Cinematic Video Styles
+   High-end Editorial / Luxury Creative Studio
+   Deep espresso matte frame · Alabaster controls · Rosewood indicator
+   ============================================ */
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  background-color: var(--deep-espresso);
+  overflow: hidden;
+  user-select: none;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--deep-espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Ambient Top HUD */
+.topHud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 22, 21, 0.75) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--alabaster);
+  background: rgba(23, 22, 21, 0.82);
+  backdrop-filter: blur(8px);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid rgba(241, 236, 230, 0.12);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--muted);
+  transition: background-color 0.3s ease;
+}
+
+.statusDotActive {
+  background-color: var(--rosewood);
+  box-shadow: 0 0 8px rgba(125, 64, 71, 0.7);
+}
+
+.roleTag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-greige);
+  background: rgba(23, 22, 21, 0.82);
+  backdrop-filter: blur(8px);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid rgba(241, 236, 230, 0.12);
+}
+
+/* Center Play Button */
+.centerPlayButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(23, 22, 21, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(241, 236, 230, 0.25);
+  color: var(--alabaster);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 6;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.videoWrapper:hover .centerPlayButton {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+/* Custom Video Controls Bar */
+.controlsBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6) var(--space-4);
+  background: linear-gradient(
+    to top,
+    rgba(23, 22, 21, 0.92) 0%,
+    rgba(23, 22, 21, 0.5) 70%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-out);
+  z-index: 10;
+}
+
+.controlsVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Progress Scrubber */
+.progressContainer {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.progressBar {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: height var(--duration-fast) ease;
+  background: rgba(241, 236, 230, 0.2);
+}
+
+.progressContainer:hover .progressBar {
+  height: 5px;
+}
+
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--alabaster);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: transform var(--duration-fast) ease;
+}
+
+.progressBar::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  background: var(--rosewood);
+}
+
+.progressBar::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--alabaster);
+  border: none;
+  cursor: pointer;
+}
+
+/* Controls Row */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Left Group */
+.controlsLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.timeDisplay {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-wider);
+  color: var(--muted);
+}
+
+.timeCurrent {
+  color: var(--alabaster);
+}
+
+.timeDivider {
+  color: var(--muted);
+}
+
+.timeDuration {
+  color: var(--warm-greige);
+}
+
+/* Right Group — Distinct, Clearly Spaced Control Items */
+.controlsRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Generic Control Button */
+.controlButton {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(23, 22, 21, 0.8);
+  border: 1px solid rgba(241, 236, 230, 0.14);
+  color: var(--alabaster);
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--duration-fast) var(--ease-out);
+  position: relative;
+  z-index: 1;
+}
+
+.controlButton:hover {
+  background: rgba(46, 46, 46, 0.9);
+  color: var(--alabaster);
+  border-color: rgba(241, 236, 230, 0.35);
+}
+
+.controlButtonActive {
+  background: rgba(125, 64, 71, 0.25);
+  border-color: var(--rosewood);
+  color: var(--alabaster);
+}
+
+/* Control 1: Volume Group */
+.volumeControlGroup {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(23, 22, 21, 0.8);
+  border: 1px solid rgba(241, 236, 230, 0.14);
+  height: 34px;
+  padding-right: var(--space-2);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.volumeControlGroup .controlButton {
+  background: transparent;
+  border: none;
+}
+
+.volumeControlGroup:hover {
+  border-color: rgba(241, 236, 230, 0.35);
+  background: rgba(46, 46, 46, 0.85);
+}
+
+.volumeSliderWrapper {
+  width: 58px;
+  display: flex;
+  align-items: center;
+  padding-inline: 4px;
+}
+
+.volumeSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  background: rgba(241, 236, 230, 0.2);
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--alabaster);
+  cursor: pointer;
+}
+
+.volumeSlider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--alabaster);
+  border: none;
+  cursor: pointer;
+}
+
+/* Control 3: Three-Dot Options Dropdown */
+.optionsWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.optionsDropdown {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  background: rgba(23, 22, 21, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(241, 236, 230, 0.16);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 20;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.menuHeader {
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(241, 236, 230, 0.1);
+}
+
+.menuTitle {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.menuSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-1);
+}
+
+.menuSectionLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--warm-greige);
+  text-transform: uppercase;
+}
+
+.speedButtonsRow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+}
+
+.speedBtn {
+  background: rgba(241, 236, 230, 0.08);
+  border: 1px solid rgba(241, 236, 230, 0.1);
+  color: var(--warm-greige);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  padding: 3px 0;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.speedBtn:hover {
+  background: rgba(241, 236, 230, 0.2);
+  color: var(--alabaster);
+}
+
+.speedBtnActive {
+  background: var(--rosewood);
+  color: var(--alabaster);
+  border-color: var(--rosewood);
+  font-weight: var(--weight-medium);
+}
+
+.menuDivider {
+  height: 1px;
+  background: rgba(241, 236, 230, 0.1);
+  margin-block: 2px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: var(--alabaster);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  padding: var(--space-2);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--duration-fast) ease;
+}
+
+.menuItem:hover {
+  background: rgba(241, 236, 230, 0.1);
+  color: var(--alabaster);
+}
+
+.menuItemStatus {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--rosewood);
+}
+
+.menuItemIcon {
+  font-size: 0.875rem;
+  color: var(--warm-greige);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .controlsBar {
+    padding: var(--space-2) var(--space-4) var(--space-3);
+  }
+
+  .topHud {
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .roleTag {
+    display: none;
+  }
+
+  .volumeSliderWrapper {
+    display: none;
+  }
+
+  .volumeControlGroup {
+    padding-right: 0;
+  }
+
+  .controlsRight {
+    gap: var(--space-2);
+  }
+
+  .optionsDropdown {
+    width: 190px;
+    right: -10px;
+  }
+}

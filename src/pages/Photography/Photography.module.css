@@ -1,0 +1,213 @@
+/* ============================================
+   FALLEN HAIR — Photography Page Styles
+   High-end Editorial Gallery
+   Alabaster canvas · Charcoal titles · Warm greige framing
+   ============================================ */
+
+.page {
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-40);
+  min-height: 100vh;
+  background-color: var(--alabaster);
+  color: var(--charcoal);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Page Header */
+.header {
+  margin-bottom: var(--space-32);
+  padding-bottom: var(--space-12);
+  border-bottom: var(--border-thin);
+}
+
+.headerMeta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--muted);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tightest);
+  text-transform: uppercase;
+  color: var(--charcoal);
+  max-width: 900px;
+  margin-bottom: var(--space-6);
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--muted);
+  max-width: 580px;
+}
+
+/* Curated Editorial Gallery Flow */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+/* Generic item structure */
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.imageFrame {
+  width: 100%;
+  background-color: var(--warm-greige);
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--duration-slowest) var(--ease-out);
+}
+
+.item:hover .image {
+  transform: scale(1.015);
+}
+
+/* Subtle Metadata block */
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  color: var(--muted);
+}
+
+.category {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+
+/* Specific editorial compositions */
+
+/* 01: Landscape - Wide 4:3 */
+.landscape {
+  max-width: 100%;
+}
+
+.landscape .imageFrame {
+  max-height: 80vh;
+}
+
+/* 02: Portrait - 3:4 offset editorial layout */
+.portrait {
+  max-width: 640px;
+  margin-left: auto;
+}
+
+.portrait .imageFrame {
+  max-height: 85vh;
+}
+
+/* 03: Panoramic - Expansive 1024/536 wide */
+.panoramic {
+  max-width: 100%;
+}
+
+.panoramic .imageFrame {
+  max-height: 75vh;
+}
+
+/* Closing */
+.closing {
+  margin-top: var(--space-40);
+  padding-top: var(--space-12);
+  border-top: var(--border-thin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.closingNote {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .header {
+    margin-bottom: var(--space-20);
+  }
+
+  .gallery {
+    gap: var(--space-24);
+  }
+
+  .portrait {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-24);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+  }
+
+  .gallery {
+    gap: var(--space-16);
+  }
+
+  .closing {
+    margin-top: var(--space-24);
+  }
+}

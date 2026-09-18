@@ -1,0 +1,130 @@
+/* ============================================
+   FALLEN HAIR — Master Design Tokens
+   High-end Editorial / Luxury Creative Studio
+   Palette: Alabaster · Warm Greige · Rosewood · Charcoal · Deep Espresso · Muted
+   ============================================ */
+
+:root {
+  /* ---- Master Color System ---- */
+  --alabaster:      #F1ECE6;
+  --warm-greige:    #DDD5CD;
+  --rosewood:       #7D4047;
+  --charcoal:       #2E2E2E;
+  --deep-espresso:  #171615;
+  --muted:          #716A64;
+
+  /* ---- Semantic Tokens ---- */
+  --color-bg:               var(--alabaster);
+  --color-bg-secondary:     var(--warm-greige);
+  --color-bg-dark:          var(--deep-espresso);
+  --color-surface:          var(--warm-greige);
+  --color-surface-dark:     var(--deep-espresso);
+
+  /* Typography Colors */
+  --color-text:             var(--charcoal);
+  --color-text-muted:       var(--muted);
+  --color-text-subtle:      #8E8780;
+  --color-text-dark:        var(--alabaster);
+  --color-text-dark-muted:  var(--warm-greige);
+
+  /* Accents (Rare — 2% proportion) */
+  --color-accent:           var(--rosewood);
+  --color-rosewood:         var(--rosewood);
+  --color-red-accent:       var(--rosewood); /* Backward-compatibility */
+
+  /* Borders */
+  --color-border:           rgba(46, 46, 46, 0.12);
+  --color-border-dark:      rgba(241, 236, 230, 0.12);
+  --border-thin:            1px solid var(--color-border);
+  --border-thin-dark:       1px solid var(--color-border-dark);
+
+  /* ---- Typography ---- */
+  --font-heading:       'Helvetica Neue', 'Arial', sans-serif;
+  --font-body:          'Helvetica Neue', 'Arial', sans-serif;
+  --font-mono:          'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Fluid type scale (clamp-based) */
+  --text-xs:            clamp(0.6875rem, 0.65rem + 0.1vw, 0.75rem);      /* ~11-12px */
+  --text-sm:            clamp(0.75rem, 0.7rem + 0.15vw, 0.875rem);       /* ~12-14px */
+  --text-base:          clamp(0.875rem, 0.82rem + 0.2vw, 1rem);          /* ~14-16px */
+  --text-md:            clamp(1rem, 0.9rem + 0.3vw, 1.25rem);            /* ~16-20px */
+  --text-lg:            clamp(1.25rem, 1.1rem + 0.5vw, 1.75rem);         /* ~20-28px */
+  --text-xl:            clamp(1.75rem, 1.4rem + 1vw, 2.75rem);           /* ~28-44px */
+  --text-2xl:           clamp(2.25rem, 1.7rem + 1.6vw, 3.75rem);         /* ~36-60px */
+  --text-3xl:           clamp(3rem, 2rem + 2.8vw, 5.5rem);               /* ~48-88px */
+  --text-4xl:           clamp(3.5rem, 2rem + 4.5vw, 8rem);               /* ~56-128px */
+  --text-display:       clamp(4rem, 2rem + 6vw, 12rem);                  /* ~64-192px */
+
+  /* Line heights */
+  --leading-tight:      0.9;
+  --leading-snug:       1.05;
+  --leading-normal:     1.4;
+  --leading-relaxed:    1.6;
+  --leading-loose:      1.8;
+
+  /* Letter spacing */
+  --tracking-tightest:  -0.05em;
+  --tracking-tight:     -0.02em;
+  --tracking-normal:    0em;
+  --tracking-wide:      0.05em;
+  --tracking-wider:     0.1em;
+  --tracking-widest:    0.2em;
+
+  /* Font weights */
+  --weight-light:       300;
+  --weight-regular:     400;
+  --weight-medium:      500;
+  --weight-semibold:    600;
+  --weight-bold:        700;
+
+  /* ---- Spacing (4px base rhythm) ---- */
+  --space-1:            0.25rem;   /* 4px */
+  --space-2:            0.5rem;    /* 8px */
+  --space-3:            0.75rem;   /* 12px */
+  --space-4:            1rem;      /* 16px */
+  --space-5:            1.25rem;   /* 20px */
+  --space-6:            1.5rem;    /* 24px */
+  --space-8:            2rem;      /* 32px */
+  --space-10:           2.5rem;    /* 40px */
+  --space-12:           3rem;      /* 48px */
+  --space-16:           4rem;      /* 64px */
+  --space-20:           5rem;      /* 80px */
+  --space-24:           6rem;      /* 96px */
+  --space-32:           8rem;      /* 128px */
+  --space-40:           10rem;     /* 160px */
+  --space-48:           12rem;     /* 192px */
+
+  /* ---- Layout ---- */
+  --container-max:      1400px;
+  --container-padding:  clamp(1.25rem, 3vw, 4rem);
+  --grid-gap:           clamp(1rem, 2vw, 2rem);
+
+  /* ---- Motion / Easing ---- */
+  --ease-out:           cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo:      cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out:        cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in-out-expo:   cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring:        cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Duration */
+  --duration-fast:      150ms;
+  --duration-base:      300ms;
+  --duration-slow:      500ms;
+  --duration-slower:    800ms;
+  --duration-slowest:   1200ms;
+
+  /* ---- Z-Index Scale ---- */
+  --z-base:             1;
+  --z-dropdown:         10;
+  --z-sticky:           20;
+  --z-overlay:          30;
+  --z-modal:            40;
+  --z-cursor:           50;
+  --z-loader:           100;
+
+  /* ---- Radii ---- */
+  --radius-sm:          2px;
+  --radius-md:          4px;
+  --radius-lg:          8px;
+  --radius-full:        9999px;
+}

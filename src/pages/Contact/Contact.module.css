@@ -1,0 +1,17 @@
+/* ============================================
+   FALLEN HAIR — Contact Page Styles
+   High-contrast Deep Espresso Theme
+   ============================================ */
+
+.page {
+  padding-top: var(--space-20);
+  min-height: 100vh;
+  background-color: var(--deep-espresso);
+  color: var(--alabaster);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-top: var(--space-12);
+  }
+}

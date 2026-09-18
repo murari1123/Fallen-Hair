@@ -1,0 +1,979 @@
+/* ============================================
+   FALLEN HAIR — JIGS Styles
+   Floating Dialogue / Modal Interface
+   Editorial UI/UX · Left-aligned JIGS · Right-aligned User
+   Palette: Deep Espresso (#171615) · Alabaster (#F1ECE6) · Rosewood (#7D4047)
+   ============================================ */
+
+/* 1. Backdrop Overlay */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal, 40);
+  background-color: rgba(23, 22, 21, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  animation: backdropFadeIn 0.35s ease-out both;
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 2. Floating Modal Dialogue Window */
+.modalDialogue {
+  position: relative;
+  width: 580px;
+  max-width: calc(100vw - 32px);
+  height: 680px;
+  max-height: min(760px, calc(100dvh - 40px));
+  background-color: #171615;
+  color: #F1ECE6;
+  border: 1px solid rgba(241, 236, 230, 0.12);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.65),
+    0 0 1px rgba(241, 236, 230, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 0;
+  animation: modalFloatIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalFloatIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 3. Fixed Modal Header */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid rgba(241, 236, 230, 0.08);
+  background-color: #171615;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.headerLeft {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.headerDot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background-color: var(--rosewood);
+  box-shadow: 0 0 6px rgba(125, 64, 71, 0.6);
+}
+
+.headerTitle {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rosewood);
+}
+
+.headerSub {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.headerRight {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.stepCounter {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  color: var(--warm-greige);
+  font-weight: var(--weight-medium);
+}
+
+.resetButton {
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.15);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.resetButton:hover {
+  border-color: var(--rosewood);
+  color: var(--rosewood);
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 var(--space-1);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.closeButton:hover {
+  color: var(--rosewood);
+}
+
+/* 4. Scrollable Internal Conversation Viewport */
+.conversationViewport {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: var(--space-6);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(241, 236, 230, 0.15) transparent;
+}
+
+.conversationViewport::-webkit-scrollbar {
+  width: 3px;
+}
+
+.conversationViewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversationViewport::-webkit-scrollbar-thumb {
+  background: rgba(241, 236, 230, 0.15);
+  border-radius: var(--radius-full);
+}
+
+.conversationStream {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+/* Starter suggestion chips */
+.starterPrompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-2);
+  animation: msgFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.starterChip {
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.18);
+  color: var(--alabaster);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.starterChip:hover {
+  background-color: rgba(125, 64, 71, 0.18);
+  border-color: var(--rosewood);
+  color: var(--alabaster);
+}
+
+/* Message block wrapper */
+.messageBlock {
+  display: flex;
+  width: 100%;
+}
+
+/* JIGS Block: Left Aligned */
+.jigsBlock {
+  justify-content: flex-start;
+  align-self: flex-start;
+  animation: msgFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.jigsMessageGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 85%;
+  gap: var(--space-1);
+}
+
+.jigsLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rosewood);
+  text-align: left;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.jigsMessageText {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 0.95vw + 0.3rem, 1.125rem);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-relaxed);
+  color: var(--alabaster);
+  text-align: left;
+  white-space: pre-line;
+  letter-spacing: -0.01em;
+}
+
+/* USER Block: Right Aligned */
+.userBlock {
+  justify-content: flex-end;
+  align-self: flex-end;
+  animation: msgFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.userMessageGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  max-width: 78%;
+  gap: var(--space-1);
+}
+
+.userLabel {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.userMessageText {
+  font-family: var(--font-body);
+  font-size: clamp(0.875rem, 0.85vw + 0.3rem, 1rem);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--warm-greige);
+  text-align: right;
+  letter-spacing: -0.005em;
+}
+
+@keyframes msgFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 5. Sticky / Fixed Bottom Interaction Footer */
+.modalFooter {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(241, 236, 230, 0.08);
+  padding: var(--space-4) var(--space-6);
+  background-color: #171615;
+  z-index: 2;
+}
+
+/* Greeting begin button */
+.greetingAction {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.beginButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.25);
+  color: var(--alabaster);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.beginButton:hover {
+  border-color: var(--rosewood);
+  background-color: rgba(125, 64, 71, 0.15);
+}
+
+.arrowMark {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.beginButton:hover .arrowMark {
+  transform: translateX(3px);
+}
+
+/* Project type options */
+.optionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.optionButton {
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.18);
+  color: var(--alabaster);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.optionButton:hover {
+  background-color: rgba(125, 64, 71, 0.18);
+  border-color: var(--rosewood);
+  color: var(--alabaster);
+}
+
+/* Input container */
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.inputRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  border-bottom: 1px solid rgba(241, 236, 230, 0.2);
+  padding-bottom: var(--space-1);
+  transition: border-color var(--duration-base) var(--ease-out);
+}
+
+.inputRow:focus-within {
+  border-color: var(--rosewood);
+}
+
+.textInput,
+.textareaInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--alabaster);
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 1vw + 0.3rem, 1.0625rem);
+  font-weight: var(--weight-light);
+  padding: var(--space-1) 0;
+  outline: none;
+  resize: none;
+}
+
+.textInput::placeholder,
+.textareaInput::placeholder {
+  color: rgba(241, 236, 230, 0.28);
+  font-weight: var(--weight-light);
+}
+
+.textareaInput {
+  min-height: 52px;
+  line-height: var(--leading-normal);
+}
+
+/* Back button */
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.12);
+  color: var(--muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--duration-base) var(--ease-out);
+  margin-bottom: var(--space-1);
+}
+
+.backButton:hover {
+  border-color: var(--rosewood);
+  color: var(--alabaster);
+}
+
+/* Send / Skip action button */
+.sendButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 30px;
+  padding-inline: var(--space-3);
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.2);
+  color: var(--alabaster);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--duration-base) var(--ease-out);
+  margin-bottom: var(--space-1);
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: rgba(125, 64, 71, 0.15);
+  border-color: var(--rosewood);
+}
+
+.sendButton:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.errorText {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--rosewood);
+  letter-spacing: 0.02em;
+}
+
+.finishEarlyBtn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: var(--space-1) 0;
+  transition: color var(--duration-base) var(--ease-out);
+  align-self: flex-end;
+}
+
+.finishEarlyBtn:hover {
+  color: var(--rosewood);
+}
+
+/* 6. Review Summary */
+.reviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid rgba(241, 236, 230, 0.08);
+  margin-top: var(--space-2);
+}
+
+.reviewHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(241, 236, 230, 0.06);
+}
+
+.reviewHeaderTitle {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-greige);
+}
+
+.reviewHeaderSub {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.reviewGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.reviewItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(241, 236, 230, 0.05);
+}
+
+.reviewItemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reviewItemLabel {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.requiredDot {
+  color: var(--rosewood);
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  color: var(--rosewood);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.editBtn:hover {
+  opacity: 0.7;
+}
+
+.reviewItemValue {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  color: var(--alabaster);
+  line-height: var(--leading-relaxed);
+  word-break: break-word;
+}
+
+/* Inline review field edit mode */
+.reviewEditContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.reviewEditInput {
+  background: rgba(241, 236, 230, 0.05);
+  border: 1px solid rgba(241, 236, 230, 0.2);
+  color: var(--alabaster);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  padding: var(--space-2);
+  outline: none;
+  resize: vertical;
+  transition: border-color var(--duration-base) var(--ease-out);
+}
+
+.reviewEditInput:focus {
+  border-color: var(--rosewood);
+}
+
+.reviewEditActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.reviewEditSave,
+.reviewEditCancel {
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid rgba(241, 236, 230, 0.2);
+  background: transparent;
+  color: var(--alabaster);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.reviewEditSave:hover {
+  background: var(--rosewood);
+  border-color: var(--rosewood);
+}
+
+.reviewEditCancel:hover {
+  color: var(--muted);
+  border-color: var(--muted);
+}
+
+.reviewActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.reviewBackBtn {
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.15);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.reviewBackBtn:hover:not(:disabled) {
+  border-color: var(--alabaster);
+  color: var(--alabaster);
+}
+
+.submitEnquiryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-6);
+  background: var(--rosewood);
+  border: none;
+  color: var(--alabaster);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+.submitEnquiryButton:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.submitEnquiryButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Footer enquiry nudge */
+.footerActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-2);
+}
+
+.enquiryNudge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(125, 64, 71, 0.15);
+  border: 1px solid var(--rosewood);
+  color: var(--alabaster);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.enquiryNudge:hover {
+  background: var(--rosewood);
+  color: var(--alabaster);
+}
+
+/* Error Banner in footer */
+.errorBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(125, 64, 71, 0.2);
+  border-left: 2px solid var(--rosewood);
+  margin-bottom: var(--space-2);
+}
+
+.errorBannerText {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--warm-greige);
+}
+
+.errorDismiss {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.errorDismiss:hover {
+  color: var(--alabaster);
+}
+
+/* 7. Submitting State */
+.submittingState {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.submittingPulse {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--rosewood);
+  animation: pulseDot 1.2s var(--ease-in-out) infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.submittingText {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  color: var(--warm-greige);
+  text-transform: uppercase;
+}
+
+/* 8. Success State */
+.successSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-2);
+}
+
+.successConfirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-2);
+  border-top: 1px solid rgba(241, 236, 230, 0.08);
+}
+
+.successCheck {
+  font-size: 1.5rem;
+  color: var(--rosewood);
+  line-height: 1;
+}
+
+.successHeading {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--alabaster);
+}
+
+.successSub {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.successActions {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-2);
+}
+
+.closeSuccessButton {
+  padding: var(--space-2) var(--space-8);
+  background: transparent;
+  border: 1px solid rgba(241, 236, 230, 0.2);
+  color: var(--alabaster);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.closeSuccessButton:hover {
+  border-color: var(--rosewood);
+  color: var(--rosewood);
+}
+
+/* 9. Error State */
+.errorSection {
+  padding: var(--space-2) 0;
+}
+
+.errorSectionText {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--warm-greige);
+  line-height: var(--leading-relaxed);
+}
+
+.directEmailLink {
+  color: var(--rosewood);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.directEmailLink:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 12px;
+  }
+
+  .modalDialogue {
+    width: 100%;
+    max-width: 100%;
+    height: calc(100dvh - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+
+  .modalHeader {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .headerSub {
+    display: none;
+  }
+
+  .conversationViewport {
+    padding: var(--space-4);
+  }
+
+  .modalFooter {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .jigsMessageGroup {
+    max-width: 95%;
+  }
+
+  .userMessageGroup {
+    max-width: 95%;
+  }
+
+  .optionsGrid {
+    flex-direction: column;
+  }
+
+  .optionButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .modalDialogue,
+  .jigsBlock,
+  .userBlock {
+    animation: none !important;
+  }
+
+  .arrowMark {
+    transition: none !important;
+  }
+}
+
+/* AI Typing Indicator */
+.typingIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background-color: rgba(241, 236, 230, 0.04);
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+
+.typingDot {
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--warm-greige);
+  opacity: 0.4;
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typingDot:nth-child(1) { animation-delay: -0.32s; }
+.typingDot:nth-child(2) { animation-delay: -0.16s; }
+.typingDot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}

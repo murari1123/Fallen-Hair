@@ -1,0 +1,161 @@
+/* ============================================
+   FALLEN HAIR — Playground Styles
+   High-end Editorial / Luxury Creative Studio
+   Asymmetric grid · Warm greige cards · Muted metadata
+   ============================================ */
+
+.playground {
+  padding-block: var(--space-32);
+  border-top: var(--border-thin);
+  color: var(--charcoal);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Section header */
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-16);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.note {
+  max-width: 320px;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wide);
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Asymmetric grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+/* Individual items */
+.item {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--warm-greige);
+  border: 1px solid rgba(46, 46, 46, 0.08);
+  transition: transform var(--duration-base) var(--ease-out),
+              background-color var(--duration-base) var(--ease-out);
+}
+
+.item:hover {
+  background-color: #D6CCC3;
+  transform: translateY(-2px);
+}
+
+/* Aspect ratio variants */
+.portrait {
+  aspect-ratio: 3 / 4;
+  grid-row: span 2;
+}
+
+.landscape {
+  aspect-ratio: 16 / 10;
+}
+
+.square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Item inner content */
+.itemInner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+}
+
+.itemLabel {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-align: center;
+  user-select: none;
+}
+
+.itemType {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+  user-select: none;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .playground {
+    padding-block: var(--space-20);
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-10);
+  }
+
+  .note {
+    text-align: left;
+    max-width: none;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  .portrait {
+    grid-row: span 1;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portrait,
+  .landscape,
+  .square {
+    aspect-ratio: 4 / 3;
+    grid-row: span 1;
+  }
+}

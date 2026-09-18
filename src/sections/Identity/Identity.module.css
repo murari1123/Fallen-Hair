@@ -1,0 +1,249 @@
+/* ============================================
+   FALLEN HAIR — Identity Styles
+   High-end Editorial Layout
+   Alabaster flow · Charcoal typography · Rosewood nuance
+   ============================================ */
+
+.identity {
+  position: relative;
+  padding-block: var(--space-24) var(--space-32);
+  margin-top: calc(-1 * var(--space-8));
+  border-top: none;
+  background-color: transparent;
+  overflow: visible;
+}
+
+.firstSection {
+  padding-top: var(--space-28);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtle Oversized Background Typographic Fragment */
+.bgFragment {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 100%;
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 14vw, 16rem);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-tightest);
+  text-transform: uppercase;
+  color: rgba(46, 46, 46, 0.024);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  line-height: 0.9;
+  overflow: hidden;
+}
+
+/* 1. Header Row */
+.headerRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: var(--space-6);
+  border-bottom: var(--border-thin);
+  margin-bottom: var(--space-16);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.microTag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  color: var(--muted);
+}
+
+/* 2. Dominant Editorial Headline */
+.statementWrapper {
+  margin-bottom: var(--space-20);
+  max-width: 1200px;
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 6.25rem);
+  font-weight: var(--weight-light);
+  line-height: 1.04;
+  letter-spacing: var(--tracking-tightest);
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+
+.lineWrap {
+  display: block;
+  overflow: hidden;
+}
+
+.line {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.line1 {
+  /* Line 1: Standard alignment */
+}
+
+.line2 {
+  padding-left: 5%;
+  color: var(--muted);
+}
+
+.line3 {
+  padding-left: 2%;
+}
+
+.line4 {
+  padding-left: 8%;
+}
+
+.wordEmphasis {
+  font-weight: var(--weight-medium);
+  color: var(--deep-espresso);
+  display: inline-block;
+}
+
+.wordOutline {
+  -webkit-text-stroke: 1px rgba(46, 46, 46, 0.45);
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.wordDisplay {
+  font-size: 1.08em;
+  letter-spacing: -0.04em;
+  color: var(--deep-espresso);
+}
+
+.period {
+  color: var(--rosewood);
+}
+
+/* 3. Supporting Body Block */
+.body {
+  max-width: 680px;
+  margin-left: auto;
+  margin-bottom: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bodyAnchor {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.anchorMark {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--rosewood);
+  line-height: 1;
+}
+
+.anchorLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.paragraph {
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 1.1vw + 0.4rem, 1.4rem);
+  font-weight: var(--weight-light);
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-tight);
+  color: var(--charcoal);
+}
+
+/* 4. Metadata Breakdown */
+.meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: var(--border-thin);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.metaValue {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--charcoal);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .headline {
+    font-size: clamp(2.25rem, 6.5vw, 4.5rem);
+  }
+
+  .line2, .line3, .line4 {
+    padding-left: 0;
+  }
+
+  .body {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .meta {
+    gap: var(--space-10);
+  }
+}
+
+@media (max-width: 768px) {
+  .identity {
+    padding-block: var(--space-16) var(--space-24);
+  }
+
+  .statementWrapper {
+    margin-bottom: var(--space-12);
+  }
+
+  .body {
+    margin-bottom: var(--space-16);
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+}

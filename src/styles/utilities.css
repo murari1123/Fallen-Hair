@@ -1,0 +1,74 @@
+/* ============================================
+   FALLEN HAIR — Utility Classes
+   Minimal layout helpers. Keep this lean.
+   ============================================ */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Full-bleed (escapes container) */
+.full-bleed {
+  width: 100vw;
+  margin-inline: calc(-50vw + 50%);
+}
+
+/* Section spacing */
+.section {
+  padding-block: var(--space-24);
+}
+
+.section-lg {
+  padding-block: var(--space-32);
+}
+
+/* Screen reader only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Display helpers */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/* Gap */
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.text-upper  { text-transform: uppercase; }
