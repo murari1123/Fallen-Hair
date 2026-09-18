@@ -25,6 +25,7 @@ dist-ssr
 .vercel
 .wrangler
 supabase/.temp
+videos_source/
 .env
 .env.*
 !.env.example

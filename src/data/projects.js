@@ -23,7 +23,7 @@ export const projects = [
     year: '2026',
     role: 'MEDIA HEAD',
     discipline: 'VIDEO EDITING · CREATIVE DIRECTION',
-    videoSrc: '/videos/Y_1_finalmeansfinal.mp4',
+    videoSrc: '/videos/tiranga-yatra-2026.mp4',
     description: 'Official cinematic documentation and campaign film for the Tiranga Yatra procession. Edited with rhythm, cultural energy, and bold visual pacing.',
   },
   {
