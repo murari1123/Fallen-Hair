@@ -14,11 +14,10 @@ import styles from './About.module.css';
 import portraitImg from '@/assets/about/murari-editorial-portrait.jpg';
 
 export function About() {
-  const containerRef = useRef(null);
   const portraitRef = useRef(null);
 
   // Subtle, sophisticated editorial entrance animations
-  useGsap((container) => {
+  const containerRef = useGsap((container) => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Portrait clean rectangular reveal
@@ -42,14 +41,38 @@ export function About() {
       );
     }
 
-    if (prefersReducedMotion) return;
+    const s1 = container.querySelector(`.${styles.s1}`);
+    const s2 = container.querySelector(`.${styles.s2}`);
+    const s3 = container.querySelector(`.${styles.s3}`);
+    const s4 = container.querySelector(`.${styles.s4}`);
+    const s5 = container.querySelector(`.${styles.s5}`);
+    const signatureStrokes = [s1, s2, s3, s4, s5];
+
+    if (prefersReducedMotion) {
+      signatureStrokes.forEach((stroke) => {
+        if (stroke) {
+          gsap.set(stroke, { strokeDashoffset: 0 });
+        }
+      });
+      return;
+    }
+
+    // Set initial dasharray and offset to exact path length for progressive handwriting reveal
+    signatureStrokes.forEach((stroke) => {
+      if (stroke) {
+        const length = Math.ceil(stroke.getTotalLength());
+        gsap.set(stroke, {
+          strokeDasharray: length,
+          strokeDashoffset: length,
+        });
+      }
+    });
 
     const eyebrow = container.querySelector(`.${styles.eyebrowRow}`);
     const heading = container.querySelector(`.${styles.heading}`);
     const paragraphs = container.querySelectorAll(`.${styles.bodyParagraph}`);
     const creedLines = container.querySelectorAll(`.${styles.creedLine}`);
     const finalStatement = container.querySelector(`.${styles.finalStatement}`);
-    const signature = container.querySelector(`.${styles.signature}`);
     const metaBar = container.querySelector(`.${styles.metaBar}`);
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -81,21 +104,85 @@ export function About() {
     .fromTo(
       finalStatement,
       { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.85 },
+      { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out' },
       0.75
-    )
-    .fromTo(
-      signature,
-      { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, duration: 1.0, ease: 'power2.out' },
-      0.95
     )
     .fromTo(
       metaBar,
       { opacity: 0, y: 10 },
       { opacity: 1, y: 0, duration: 0.8 },
-      1.1
+      1.0
     );
+
+    // Sequential handwriting stroke-by-stroke animation
+    // Final quote finishes at 0.75 + 0.75 = 1.50s.
+    // Breath of ~120ms (100–150ms) -> writing starts at 1.62s.
+    const startSign = 1.62;
+
+    // Stroke 1: 0.00s – 0.28s (First curved stroke)
+    if (s1) {
+      tl.to(
+        s1,
+        {
+          strokeDashoffset: 0,
+          duration: 0.28,
+          ease: 'power1.inOut',
+        },
+        startSign
+      );
+    }
+
+    // Stroke 2: 0.28s – 0.65s (Second major curved stroke, continuous flow)
+    if (s2) {
+      tl.to(
+        s2,
+        {
+          strokeDashoffset: 0,
+          duration: 0.38,
+          ease: 'power1.inOut',
+        },
+        startSign + 0.27
+      );
+    }
+
+    // Stroke 3: 0.65s – 1.05s (Internal signature strokes, faster rhythm)
+    if (s3) {
+      tl.to(
+        s3,
+        {
+          strokeDashoffset: 0,
+          duration: 0.40,
+          ease: 'power1.inOut',
+        },
+        startSign + 0.64
+      );
+    }
+
+    // Stroke 4: 1.05s – 1.35s (Tall vertical finishing stroke, swift and confident)
+    if (s4) {
+      tl.to(
+        s4,
+        {
+          strokeDashoffset: 0,
+          duration: 0.30,
+          ease: 'power2.out',
+        },
+        startSign + 1.03
+      );
+    }
+
+    // Stroke 5: 1.35s – 1.75s (Long diagonal finishing sweep drawn LAST, accelerating)
+    if (s5) {
+      tl.to(
+        s5,
+        {
+          strokeDashoffset: 0,
+          duration: 0.42,
+          ease: 'power2.out',
+        },
+        startSign + 1.32
+      );
+    }
   }, []);
 
   return (
@@ -154,7 +241,40 @@ export function About() {
             </div>
 
             {/* Personal Handwritten Pen Signature */}
-            <div className={styles.signature}>Murari</div>
+            <div
+              className={styles.signature}
+              aria-label="Murari handwritten signature"
+            >
+              <svg
+                viewBox="120 0 1745 700"
+                className={styles.signatureSvg}
+                role="img"
+                aria-label="Murari handwritten signature"
+              >
+                <g>
+                  <path
+                    className={`${styles.signatureStroke} ${styles.s1}`}
+                    d="M 170 330 C 155 285 170 220 225 170 C 285 115 355 95 395 125 C 430 152 435 205 432 275 C 430 325 427 365 430 405"
+                  />
+                  <path
+                    className={`${styles.signatureStroke} ${styles.s2}`}
+                    d="M 430 405 C 432 320 425 245 455 170 C 495 70 565 20 625 32 C 680 42 690 105 690 175 C 690 260 675 345 650 425 C 625 500 570 575 510 665"
+                  />
+                  <path
+                    className={`${styles.signatureStroke} ${styles.s3}`}
+                    d="M 510 665 C 560 570 625 455 715 350 L 770 285 L 780 450 L 870 325 L 925 255 L 935 425 C 990 410 1040 365 1085 275 L 1120 205"
+                  />
+                  <path
+                    className={`${styles.signatureStroke} ${styles.s4}`}
+                    d="M 1120 205 L 1118 430"
+                  />
+                  <path
+                    className={`${styles.signatureStroke} ${styles.s5}`}
+                    d="M 805 555 C 910 505 1015 460 1120 410 C 1300 320 1510 205 1745 70"
+                  />
+                </g>
+              </svg>
+            </div>
 
           </div>
 

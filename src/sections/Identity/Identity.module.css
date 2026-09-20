@@ -95,7 +95,7 @@
 
 .line {
   display: inline-block;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .line1 {

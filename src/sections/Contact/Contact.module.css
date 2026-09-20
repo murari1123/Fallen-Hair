@@ -87,27 +87,17 @@
   padding-bottom: var(--space-1);
   border-bottom: 1px solid rgba(241, 236, 230, 0.35);
   transition:
-    border-color var(--duration-base) var(--ease-out),
-    color var(--duration-base) var(--ease-out);
+    border-color var(--duration-interaction, 200ms) var(--ease-editorial, ease-out),
+    color var(--duration-interaction, 200ms) var(--ease-editorial, ease-out),
+    transform var(--duration-interaction, 200ms) var(--ease-editorial, ease-out);
 }
 
 .actionLink:hover {
   border-color: var(--rosewood);
   color: var(--alabaster);
+  transform: translateY(-1px);
 }
 
-/* JIGS trigger button — distinguished from plain links */
-.jigsButton {
-  border-color: var(--rosewood);
-  cursor: pointer;
-  background: transparent;
-  font-family: var(--font-body);
-}
-
-.jigsButton:hover {
-  background-color: rgba(125, 64, 71, 0.15);
-  opacity: 1;
-}
 
 /* Contact details list */
 .details {
@@ -208,5 +198,12 @@ a.detailValue:hover {
   .actions {
     flex-direction: column;
     gap: var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actionLink {
+    transform: none !important;
+    transition: color var(--duration-fast, 150ms) ease !important;
   }
 }

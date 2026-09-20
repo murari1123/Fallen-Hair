@@ -11,6 +11,7 @@ import { Photography } from '@/pages/Photography/Photography';
 import { About } from '@/pages/About/About';
 import { Contact } from '@/pages/Contact/Contact';
 import { JigsAdmin } from '@/pages/JigsAdmin/JigsAdmin';
+import { ScrollTrigger } from '@/lib/gsapConfig';
 import { normalizeRoute, navigate } from '@/lib/navigation';
 
 export function Router() {
@@ -20,6 +21,9 @@ export function Router() {
     const onLocationChange = () => {
       setPath(normalizeRoute(window.location.pathname));
       window.scrollTo({ top: 0, behavior: 'instant' });
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     };
 
     window.addEventListener('popstate', onLocationChange);

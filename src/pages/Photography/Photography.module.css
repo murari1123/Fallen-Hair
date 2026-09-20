@@ -211,3 +211,10 @@
     margin-top: var(--space-24);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .image {
+    transform: none !important;
+    transition: none !important;
+  }
+}

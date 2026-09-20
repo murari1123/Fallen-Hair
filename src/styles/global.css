@@ -10,7 +10,6 @@ html {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: var(--leading-normal);
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -70,8 +69,8 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-  transition: opacity var(--duration-base) var(--ease-out),
-              color var(--duration-base) var(--ease-out);
+  transition: opacity var(--duration-interaction, 200ms) var(--ease-editorial, ease-out),
+              color var(--duration-interaction, 200ms) var(--ease-editorial, ease-out);
 }
 
 a:hover {

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="120 0 1745 700" role="img" aria-label="Murari handwritten signature">
+  <style>
+    .signature-stroke {
+      fill: none;
+      stroke: #2E2E2E;
+      stroke-width: 22;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: sign-draw 0.55s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .s1 { animation-delay: 0s; }
+    .s2 { animation-delay: .34s; }
+    .s3 { animation-delay: .72s; }
+    .s4 { animation-delay: 1.08s; }
+    .s5 { animation-delay: 1.24s; }
+    @keyframes sign-draw { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .signature-stroke { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+  <g>
+    <path pathLength="1" class="signature-stroke s1" d="M 170 330 C 155 285 170 220 225 170 C 285 115 355 95 395 125 C 430 152 435 205 432 275 C 430 325 427 365 430 405"/>
+    <path pathLength="1" class="signature-stroke s2" d="M 430 405 C 432 320 425 245 455 170 C 495 70 565 20 625 32 C 680 42 690 105 690 175 C 690 260 675 345 650 425 C 625 500 570 575 510 665"/>
+    <path pathLength="1" class="signature-stroke s3" d="M 510 665 C 560 570 625 455 715 350 L 770 285 L 780 450 L 870 325 L 925 255 L 935 425 C 990 410 1040 365 1085 275 L 1120 205"/>
+    <path pathLength="1" class="signature-stroke s4" d="M 1120 205 L 1118 430"/>
+    <path pathLength="1" class="signature-stroke s5" d="M 805 555 C 910 505 1015 460 1120 410 C 1300 320 1510 205 1745 70"/>
+  </g>
+</svg>

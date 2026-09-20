@@ -28,8 +28,15 @@ import { gsap } from '@/lib/gsapConfig';
  *   return <div ref={containerRef}>...</div>;
  * }
  */
-export function useGsap(callback, deps = []) {
-  const containerRef = useRef(null);
+export function useGsap(callback, targetRefOrDeps = [], maybeDeps = []) {
+  const isCustomRef =
+    targetRefOrDeps &&
+    typeof targetRefOrDeps === 'object' &&
+    'current' in targetRefOrDeps;
+
+  const internalRef = useRef(null);
+  const containerRef = isCustomRef ? targetRefOrDeps : internalRef;
+  const deps = isCustomRef ? maybeDeps : targetRefOrDeps;
 
   useEffect(() => {
     if (!containerRef.current) return;

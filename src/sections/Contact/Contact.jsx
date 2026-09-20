@@ -3,25 +3,56 @@
    Editorial closing section with floating JIGS dialogue.
    ============================================ */
 
-import { useRef, useEffect } from 'react';
-import { useJigsModal } from '@/components/Jigs/context/JigsModalContext';
+import { useGsap } from '@/hooks/useGsap';
+import { gsap } from '@/lib/gsapConfig';
 import styles from './Contact.module.css';
 
 export function Contact() {
-  const { isOpen: showJigs, openJigs } = useJigsModal();
-  const triggerButtonRef = useRef(null);
-  const prevShowJigsRef = useRef(false);
+  /* Grouped viewport reveal timeline */
+  const containerRef = useGsap((container) => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
 
-  /* Return focus to TALK TO JIGS trigger button when modal closes */
-  useEffect(() => {
-    if (prevShowJigsRef.current && !showJigs) {
-      triggerButtonRef.current?.focus();
-    }
-    prevShowJigsRef.current = showJigs;
-  }, [showJigs]);
+    const label = container.querySelector(`.${styles.label}`);
+    const headline = container.querySelector(`.${styles.headline}`);
+    const subtext = container.querySelector(`.${styles.subtext}`);
+    const actions = container.querySelector(`.${styles.actions}`);
+    const details = container.querySelector(`.${styles.details}`);
+    const availability = container.querySelector(`.${styles.availability}`);
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: 'top 85%',
+        once: true,
+      },
+      defaults: { ease: 'power3.out' },
+    });
+
+    // Group 1: Eyebrow + Headline
+    tl.fromTo(
+      [label, headline],
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }
+    )
+    // Group 2: Subtext + Action Links
+    .fromTo(
+      [subtext, actions],
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.75, stagger: 0.1 },
+      '-=0.45'
+    )
+    // Group 3: Details Grid + Availability Status
+    .fromTo(
+      [details, availability],
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
+      '-=0.4'
+    );
+  }, []);
 
   return (
-    <section className={styles.contact} aria-label="Contact">
+    <section ref={containerRef} className={styles.contact} aria-label="Contact">
       <div className={styles.container}>
 
         <div className={styles.content}>
@@ -38,15 +69,6 @@ export function Contact() {
           </p>
 
           <div className={styles.actions}>
-            <button
-              ref={triggerButtonRef}
-              className={`${styles.actionLink} ${styles.jigsButton}`}
-              onClick={() => openJigs(triggerButtonRef.current)}
-              aria-haspopup="dialog"
-              aria-expanded={showJigs}
-            >
-              TALK TO JIGS
-            </button>
             <a
               href="mailto:muraridamalapati@gmail.com"
               className={styles.actionLink}

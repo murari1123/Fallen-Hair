@@ -16,19 +16,7 @@
   background-color: transparent;
 }
 
-/* 1. Film Grain Atmosphere Layer */
-.filmGrain {
-  position: absolute;
-  inset: -30% -50% -50% -50%;
-  width: 200%;
-  height: 200%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.022;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  mix-blend-mode: multiply;
-}
+
 
 /* 2. Ambient Light & Shadows Layer */
 .ambientGlow {
@@ -68,7 +56,7 @@
   right: 22%;
 }
 
-/* 3. Massive Ghost Watermark (Deep continuous layer) */
+/* 3. Massive Ghost Watermark (Deep continuous layer with restrained mouse parallax) */
 .ghostWatermark {
   position: absolute;
   top: 52%;
@@ -85,6 +73,10 @@
   color: rgba(46, 46, 46, 0.028);
   white-space: nowrap;
   line-height: 1;
+}
+
+.ghostWatermark span {
+  display: inline-block;
 }
 
 /* 4. Subtle Editorial Grid & Coordinate Marks */
@@ -192,7 +184,6 @@
   text-align: center;
   gap: var(--space-6);
   max-width: 960px;
-  will-change: transform, opacity;
 }
 
 .overlineContainer {
@@ -219,7 +210,15 @@
   user-select: none;
 }
 
-.titleLine {
+/* Line mask container for clean upward entrance */
+.titleLineMask {
+  display: block;
+  overflow: hidden;
+  line-height: 1;
+  padding-bottom: 0.04em;
+}
+
+.titleLineText {
   display: inline-flex;
   align-items: baseline;
   justify-content: center;
@@ -230,46 +229,18 @@
   letter-spacing: var(--tracking-tightest);
   text-transform: uppercase;
   color: var(--charcoal);
-  will-change: transform;
 }
 
-/* Interactive Split Letters */
-.charWrapper {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  padding-bottom: 0.06em;
-}
-
-.char {
-  display: inline-block;
-  will-change: transform, color;
-  color: var(--charcoal);
-  cursor: default;
-}
-
-/* Accent Dot — High-End Rosewood Touch */
-.dotWrapper {
-  display: inline-block;
-  vertical-align: baseline;
-  margin-left: 0.04em;
-}
-
+/* Accent Dot */
 .accentDot {
   display: inline-block;
   color: var(--rosewood);
   font-size: 1.05em;
   line-height: 1;
-  text-shadow: 0 0 16px rgba(125, 64, 71, 0.45);
-  cursor: pointer;
-  will-change: transform, color;
+  margin-left: 0.04em;
 }
 
 /* Subtitle */
-.subtitleContainer {
-  overflow: hidden;
-}
-
 .subtitle {
   font-family: var(--font-heading);
   font-size: var(--text-md);
@@ -282,11 +253,6 @@
   gap: var(--space-3);
 }
 
-.alias {
-  font-weight: var(--weight-light);
-  color: var(--muted);
-}
-
 /* Minimal Divider */
 .divider {
   width: 48px;
@@ -296,10 +262,6 @@
 }
 
 /* Tagline */
-.taglineContainer {
-  overflow: hidden;
-}
-
 .tagline {
   display: flex;
   align-items: center;
@@ -317,7 +279,7 @@
   color: var(--warm-greige);
 }
 
-/* 6. Scroll Indicator */
+/* 6. Editorial Scroll Indicator */
 .scrollIndicator {
   position: absolute;
   bottom: var(--space-8);
@@ -326,11 +288,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  gap: 4px;
   z-index: 3;
+  transition: opacity 400ms var(--ease-out, ease-out);
 }
 
-.scrollLabel {
+.scrollText {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
   letter-spacing: var(--tracking-widest);
@@ -338,43 +301,31 @@
   color: var(--muted);
 }
 
-.scrollLine {
-  width: 1px;
-  height: 36px;
-  background: linear-gradient(
-    to bottom,
-    var(--muted) 0%,
-    rgba(46, 46, 46, 0.1) 100%
-  );
-  animation: scrollPulse 2.4s ease-in-out infinite;
+.scrollArrow {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  display: inline-block;
+  animation: scrollArrowFloat 2.2s ease-in-out infinite;
 }
 
-@keyframes scrollPulse {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-    opacity: 0;
+@keyframes scrollArrowFloat {
+  0%, 100% {
+    transform: translateY(0);
   }
-  40% {
-    transform: scaleY(1);
-    transform-origin: top;
-    opacity: 0.8;
+  50% {
+    transform: translateY(6px);
   }
-  60% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-    opacity: 0.8;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-    opacity: 0;
-  }
+}
+
+.scrollHidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
-  .titleLine {
+  .titleLineText {
     font-size: clamp(3rem, 10vw, 6rem);
   }
 
@@ -389,7 +340,7 @@
     padding-bottom: var(--space-6);
   }
 
-  .titleLine {
+  .titleLineText {
     font-size: clamp(2.5rem, 12vw, 4.5rem);
     line-height: 1;
   }
@@ -398,6 +349,7 @@
     flex-direction: row;
     gap: var(--space-2);
     font-size: 0.625rem;
+    letter-spacing: 0.14em;
   }
 
   .editorialGrid {
@@ -416,12 +368,19 @@
 
   .ghostWatermark {
     font-size: clamp(6rem, 28vw, 14rem);
+    transform: translate(-50%, -50%) !important; /* Disable parallax on mobile */
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scrollLine {
+  .scrollArrow {
     animation: none;
-    opacity: 0.5;
+  }
+
+  .titleLineText,
+  .accentDot,
+  .ghostWatermark {
+    transform: none !important;
+    transition: none !important;
   }
 }

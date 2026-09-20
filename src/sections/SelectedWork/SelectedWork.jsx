@@ -4,6 +4,8 @@
    video showcase for TIRANGA YATRA 2026.
    ============================================ */
 
+import { useGsap } from '@/hooks/useGsap';
+import { gsap } from '@/lib/gsapConfig';
 import { projects } from '@/data/projects';
 import { CinematicVideo } from '@/components/CinematicVideo/CinematicVideo';
 import styles from './SelectedWork.module.css';
@@ -63,8 +65,89 @@ function ProjectEntry({ project, isLast }) {
 }
 
 export function SelectedWork() {
+  const containerRef = useGsap((container) => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Header reveal
+    const header = container.querySelector(`.${styles.sectionHeader}`);
+    if (header) {
+      gsap.fromTo(
+        header,
+        { opacity: 0, y: 14 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: header,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+
+    // Projects grouped reveal
+    const projectElements = container.querySelectorAll(`.${styles.project}`);
+    projectElements.forEach((projectEl) => {
+      const headerEl = projectEl.querySelector(`.${styles.projectHeader}`);
+      const mediaEl = projectEl.querySelector(`.${styles.projectMedia}`);
+      const footerEl = projectEl.querySelector(`.${styles.projectFooter}`);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: projectEl,
+          start: 'top 82%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      if (headerEl) {
+        tl.fromTo(
+          headerEl,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+        );
+      }
+
+      if (mediaEl) {
+        tl.fromTo(
+          mediaEl,
+          { opacity: 0.85, scale: 1.02 },
+          { opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' },
+          '-=0.3'
+        );
+      }
+
+      if (footerEl) {
+        const titleEl = footerEl.querySelector(`.${styles.footerLeft}`);
+        const descEl = footerEl.querySelector(`.${styles.projectDescription}`);
+
+        if (titleEl) {
+          tl.fromTo(
+            titleEl,
+            { opacity: 0, y: 14 },
+            { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+            '-=0.4'
+          );
+        }
+
+        if (descEl) {
+          tl.fromTo(
+            descEl,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' },
+            '-=0.35'
+          );
+        }
+      }
+    });
+  }, []);
+
   return (
-    <section className={styles.selectedWork} aria-label="Selected Work">
+    <section ref={containerRef} className={styles.selectedWork} aria-label="Selected Work">
       <div className={styles.container}>
 
         <div className={styles.sectionHeader}>
