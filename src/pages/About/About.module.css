@@ -151,12 +151,13 @@
 
 /* Final Statement Block */
 .finalStatement {
-  margin-bottom: var(--space-6);
+  margin-bottom: 0;
   padding-left: var(--space-4);
   border-left: 2px solid #7D4047;
 }
 
 .finalStatementText {
+  margin: 0;
   font-family: var(--font-body);
   font-size: clamp(0.9375rem, 0.85vw + 0.35rem, 1.0625rem);
   font-weight: var(--weight-regular);
@@ -167,18 +168,43 @@
 
 /* Authentic Handwritten Pen Signature */
 .signature {
-  font-family: 'Nothing You Could Do', 'Caveat', 'Covered By Your Grace', 'Reenie Beanie', cursive;
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
-  font-weight: 400;
-  color: #202020;
-  line-height: 1;
+  position: relative;
+  display: block;
+  width: clamp(140px, 16vw, 168px);
+  aspect-ratio: 1745 / 700;
+  max-width: 100%;
+  margin-top: 14px;
+  margin-left: calc(var(--space-4) + 2px);
+  margin-bottom: var(--space-6);
   user-select: none;
-  transform: rotate(-2deg);
-  transform-origin: left center;
-  margin-top: var(--space-6);
-  margin-bottom: var(--space-4);
-  display: inline-block;
-  letter-spacing: 0.02em;
+}
+
+.signatureSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.signatureStroke {
+  fill: none;
+  stroke: #2E2E2E;
+  stroke-width: 22;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.s1 {}
+.s2 {}
+.s3 {}
+.s4 {}
+.s5 {}
+
+@media (prefers-reduced-motion: reduce) {
+  .signatureStroke {
+    stroke-dashoffset: 0 !important;
+  }
 }
 
 /* Right Column: Clean Rectangular Editorial Portrait */
@@ -295,10 +321,6 @@
   .heading {
     font-size: clamp(2rem, 7.5vw, 3.25rem);
     margin-bottom: var(--space-6);
-  }
-
-  .signature {
-    font-size: clamp(2rem, 8vw, 2.75rem);
   }
 
   .metaBar {

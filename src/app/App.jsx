@@ -4,8 +4,6 @@
    Includes global JIGS Studio Assistant launcher and modal.
    ============================================ */
 
-import { ReactLenis } from 'lenis/react';
-import { lenisOptions } from '@/lib/lenisConfig';
 import { Navbar } from '@/components/Navbar/Navbar';
 import { Footer } from '@/components/Footer/Footer';
 import { Router } from '@/app/Router';
@@ -32,10 +30,8 @@ function AppContent() {
 
 export function App() {
   return (
-    <ReactLenis root options={lenisOptions}>
-      <JigsModalProvider>
-        <AppContent />
-      </JigsModalProvider>
-    </ReactLenis>
+    <JigsModalProvider>
+      <AppContent />
+    </JigsModalProvider>
   );
 }

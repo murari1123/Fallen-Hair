@@ -6,9 +6,12 @@
    ============================================ */
 
 import { createContext, useContext, useState, useRef, useCallback } from 'react';
+import { normalizeRoute } from '@/lib/navigation';
 
 const JigsModalContext = createContext({
   isOpen: false,
+  isIntroComplete: false,
+  markIntroComplete: () => {},
   openJigs: () => {},
   closeJigs: () => {},
   toggleJigs: () => {},
@@ -16,7 +19,17 @@ const JigsModalContext = createContext({
 
 export function JigsModalProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isIntroComplete, setIsIntroComplete] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return normalizeRoute(window.location.pathname) !== '/';
+    }
+    return false;
+  });
   const lastTriggerRef = useRef(null);
+
+  const markIntroComplete = useCallback(() => {
+    setIsIntroComplete(true);
+  }, []);
 
   const openJigs = useCallback((triggerElement = null) => {
     if (triggerElement && typeof triggerElement.focus === 'function') {
@@ -49,7 +62,16 @@ export function JigsModalProvider({ children }) {
   }, [isOpen, openJigs, closeJigs]);
 
   return (
-    <JigsModalContext.Provider value={{ isOpen, openJigs, closeJigs, toggleJigs }}>
+    <JigsModalContext.Provider
+      value={{
+        isOpen,
+        isIntroComplete,
+        markIntroComplete,
+        openJigs,
+        closeJigs,
+        toggleJigs,
+      }}
+    >
       {children}
     </JigsModalContext.Provider>
   );

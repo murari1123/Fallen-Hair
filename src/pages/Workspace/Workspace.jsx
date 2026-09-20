@@ -6,7 +6,7 @@
    depth-layered HTML/CSS content sections.
    ============================================ */
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SpatialAtmosphere } from './components/SpatialAtmosphere';
 import styles from './Workspace.module.css';
 
@@ -24,11 +24,19 @@ export function Workspace() {
   const smoothRef = useRef(0);
   const rafRef = useRef(null);
 
-  // Smooth scroll tracking loop
+  // Smooth scroll tracking loop — only runs during active scroll interpolation
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let isRunning = false;
 
-    const updateScroll = () => {
+    const startScrollLoop = () => {
+      if (!isRunning) {
+        isRunning = true;
+        rafRef.current = requestAnimationFrame(updateScroll);
+      }
+    };
+
+    const onScroll = () => {
       const el = pageRef.current;
       if (!el) return;
 
@@ -36,31 +44,30 @@ export function Workspace() {
       const docHeight = el.scrollHeight - window.innerHeight;
       const raw = docHeight > 0 ? scrollTop / docHeight : 0;
       scrollRef.current = Math.max(0, Math.min(1, raw));
-
-      // Smooth interpolation
-      const lerpFactor = prefersReduced ? 1 : 0.08;
-      smoothRef.current += (scrollRef.current - smoothRef.current) * lerpFactor;
-      setScrollProgress(smoothRef.current);
-
-      rafRef.current = requestAnimationFrame(updateScroll);
+      startScrollLoop();
     };
 
-    rafRef.current = requestAnimationFrame(updateScroll);
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, []);
+    const updateScroll = () => {
+      const delta = scrollRef.current - smoothRef.current;
+      const lerpFactor = prefersReduced ? 1 : 0.08;
 
-  // Compute per-element parallax transforms based on smooth scroll
-  const getParallax = useCallback((depth = 0, baseOffset = 0) => {
-    // depth: 0 = foreground, 1 = far background
-    // Positive depth means the element moves slower (parallax)
-    const speed = 1 - depth * 0.6;
-    const y = smoothRef.current * depth * -180 + baseOffset;
-    const scale = 1 + depth * 0.02;
-    const z = depth * -60;
+      if (Math.abs(delta) > 0.0002) {
+        smoothRef.current += delta * lerpFactor;
+        setScrollProgress(smoothRef.current);
+        rafRef.current = requestAnimationFrame(updateScroll);
+      } else {
+        smoothRef.current = scrollRef.current;
+        setScrollProgress(smoothRef.current);
+        isRunning = false;
+      }
+    };
 
-    return {
-      transform: `translate3d(0, ${y}px, ${z}px) scale(${scale})`,
-      opacity: undefined,
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -121,7 +128,7 @@ export function Workspace() {
             <div className={styles.heroSub}>
               <span className={styles.heroName}>MURARI — PANDU</span>
               <span className={styles.heroDivider}>/</span>
-              <span className={styles.heroRole}>DESIGN · EDITING · PHOTOGRAPHY</span>
+              <span className={styles.heroRole}>EDITING · MOTION · VISUAL STORYTELLING</span>
             </div>
             <div className={styles.scrollCue}>
               <span className={styles.scrollLine} />
@@ -154,8 +161,8 @@ export function Workspace() {
               <span className={styles.idLine}>A <em>CREATIVE</em> mind working</span>
               <span className={styles.idLine2}>at the intersection of</span>
               <span className={styles.idLine3}>
-                <span className={styles.wordOutline}>DESIGN</span>,{' '}
-                <em>EDITING</em> and{' '}
+                <span className={styles.wordOutline}>EDITING</span>,{' '}
+                <em>MOTION</em> and{' '}
                 <span className={styles.wordOutline}>VISUAL</span>
               </span>
               <span className={styles.idLine4}>
@@ -185,11 +192,11 @@ export function Workspace() {
               <span className={styles.metaValue}>Murari</span>
             </div>
             <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Aka</span>
+              <span className={styles.metaLabel}>Alias</span>
               <span className={styles.metaValue}>Pandu</span>
             </div>
             <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Screen Name</span>
+              <span className={styles.metaLabel}>Studio</span>
               <span className={styles.metaValue}>Fallen Hair</span>
             </div>
           </div>

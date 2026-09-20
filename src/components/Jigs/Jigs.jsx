@@ -115,7 +115,7 @@ export function Jigs({ onClose }) {
       aria-modal="true"
       aria-label="JIGS — Fallen Hair Studio Assistant"
     >
-      <div ref={modalRef} className={styles.modalDialogue} onClick={(e) => e.stopPropagation()}>
+      <div ref={modalRef} className={styles.modalDialogue} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
 
         {/* ---- Header ---- */}
         <div className={styles.modalHeader}>
@@ -140,8 +140,7 @@ export function Jigs({ onClose }) {
             <button
               className={styles.closeButton}
               onClick={onClose}
-              aria-label="Close JIGS"
-              title="Close (ESC)"
+              aria-label="Close JIGS assistant"
               type="button"
             >
               ×
@@ -150,7 +149,7 @@ export function Jigs({ onClose }) {
         </div>
 
         {/* ---- Conversation Viewport ---- */}
-        <div ref={conversationRef} className={styles.conversationViewport}>
+        <div ref={conversationRef} className={styles.conversationViewport} data-lenis-prevent>
           <div className={styles.conversationStream}>
 
             {/* Locked intro message */}

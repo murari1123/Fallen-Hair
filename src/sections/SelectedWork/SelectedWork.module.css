@@ -129,6 +129,7 @@
 .projectMedia {
   margin-bottom: var(--space-8);
   width: 100%;
+  overflow: hidden;
 }
 
 .mediaPlaceholder {
@@ -234,5 +235,14 @@
 
   .projectTitle {
     font-size: var(--text-xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectMedia,
+  .projectHeader,
+  .projectFooter {
+    transform: none !important;
+    transition: none !important;
   }
 }

@@ -1,6 +1,7 @@
 /* ============================================
    FALLEN HAIR — Navbar
-   Minimal fixed navigation for dedicated pages.
+   Quiet editorial navigation system.
+   Transparent at top · Subtly docked on scroll · Clean underline reveals.
    ============================================ */
 
 import { useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ import styles from './Navbar.module.css';
 
 export function Navbar() {
   const [currentPath, setCurrentPath] = useState(() => normalizeRoute(window.location.pathname));
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleLocation = () => {
@@ -21,18 +23,36 @@ export function Navbar() {
     return () => window.removeEventListener('popstate', handleLocation);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 24;
+      setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navRef = useGsap((container) => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     gsap.from(container, {
-      y: -20,
+      y: -12,
       opacity: 0,
-      duration: 1,
-      delay: 0.2,
+      duration: 0.8,
+      delay: 0.15,
       ease: 'power3.out',
     });
   }, []);
 
   return (
-    <header ref={navRef} className={styles.navbar} role="banner">
+    <header
+      ref={navRef}
+      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}
+      role="banner"
+    >
       <div className={styles.inner}>
         <a
           href="/"

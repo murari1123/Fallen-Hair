@@ -4,13 +4,53 @@
    experimental visual playground, and 3D Workspace.
    ============================================ */
 
+import { useGsap } from '@/hooks/useGsap';
+import { gsap } from '@/lib/gsapConfig';
 import { SelectedWork } from '@/sections/SelectedWork/SelectedWork';
 import { Playground } from '@/sections/Playground/Playground';
 import styles from './Work.module.css';
 
 export function Work() {
+  const containerRef = useGsap((container) => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Header reveal
+    const header = container.querySelector(`.${styles.header}`);
+    if (header) {
+      const label = header.querySelector(`.${styles.label}`);
+      const title = header.querySelector(`.${styles.title}`);
+      const subtitle = header.querySelector(`.${styles.subtitle}`);
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      if (label) tl.fromTo(label, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6 }, 0.05);
+      if (title) tl.fromTo(title, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8 }, 0.15);
+      if (subtitle) tl.fromTo(subtitle, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, 0.3);
+    }
+
+    // 3D Workspace entry card reveal
+    const workspaceCard = container.querySelector(`.${styles.workspaceCard}`);
+    if (workspaceCard) {
+      gsap.fromTo(
+        workspaceCard,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: workspaceCard,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
-    <div className={styles.page}>
+    <div ref={containerRef} className={styles.page}>
       <div className={styles.container}>
         <header className={styles.header}>
           <span className={styles.label}>Selected Work</span>

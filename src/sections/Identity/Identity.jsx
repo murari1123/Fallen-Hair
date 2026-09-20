@@ -1,8 +1,8 @@
 /* ============================================
    FALLEN HAIR — Identity / Intro Section
    Asymmetric creative editorial spread with
-   line-by-line blur reveal, background parallax,
-   and typographical nuances.
+   restrained line entrance, background parallax drift,
+   and accurate creative studio positioning.
    ============================================ */
 
 import { useRef } from 'react';
@@ -11,20 +11,22 @@ import { gsap } from '@/lib/gsapConfig';
 import styles from './Identity.module.css';
 
 export function Identity({ isFirstSection = false }) {
-  const containerRef = useRef(null);
   const bgTextRef = useRef(null);
 
-  useGsap((container) => {
+  const containerRef = useGsap((container) => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const lines = container.querySelectorAll(`.${styles.line}`);
     const bodyBlock = container.querySelector(`.${styles.body}`);
     const metaItems = container.querySelectorAll(`.${styles.metaItem}`);
     const microTags = container.querySelectorAll(`.${styles.microTag}`);
 
-    // 1. Initial Scroll-Triggered Reveal Timeline
+    // 1. Initial Scroll-Triggered Reveal Timeline (Grouped line reveal)
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        start: isFirstSection ? 'top 95%' : 'top 80%',
+        start: isFirstSection ? 'top 95%' : 'top 75%',
         once: true,
       },
     });
@@ -32,48 +34,15 @@ export function Identity({ isFirstSection = false }) {
     // Eyebrow & micro tags
     tl.fromTo(
       [container.querySelector(`.${styles.label}`), ...microTags],
-      { opacity: 0, y: 15 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' }
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.06, ease: 'power3.out' }
     )
-    // Headline lines sequence with blur resolving into crisp white
+    // Headline lines sequence: crisp upward reveal, no jarring blur
     .fromTo(
       lines,
       {
         opacity: 0,
-        y: 30,
-        filter: 'blur(8px)',
-      },
-      {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        duration: 1.1,
-        stagger: 0.14,
-        ease: 'power3.out',
-      },
-      '-=0.4'
-    )
-    // Supporting paragraph block quietly fades in with small upward translation
-    .fromTo(
-      bodyBlock,
-      {
-        opacity: 0,
-        y: 16,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-      },
-      '-=0.2'
-    )
-    // Identity metadata row
-    .fromTo(
-      metaItems,
-      {
-        opacity: 0,
-        y: 15,
+        y: 24,
       },
       {
         opacity: 1,
@@ -82,7 +51,38 @@ export function Identity({ isFirstSection = false }) {
         stagger: 0.08,
         ease: 'power3.out',
       },
-      '-=0.5'
+      '-=0.3'
+    )
+    // Supporting paragraph block quietly fades in with small upward translation
+    .fromTo(
+      bodyBlock,
+      {
+        opacity: 0,
+        y: 12,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: 'power3.out',
+      },
+      '-=0.25'
+    )
+    // Identity metadata row
+    .fromTo(
+      metaItems,
+      {
+        opacity: 0,
+        y: 10,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        stagger: 0.08,
+        ease: 'power3.out',
+      },
+      '-=0.3'
     );
 
     // 2. Subtle Background Typographic Element Parallax Drift
@@ -91,7 +91,7 @@ export function Identity({ isFirstSection = false }) {
         bgTextRef.current,
         { x: '0%' },
         {
-          x: '-8%',
+          x: '-6%',
           ease: 'none',
           scrollTrigger: {
             trigger: container,
@@ -141,11 +141,11 @@ export function Identity({ isFirstSection = false }) {
               </span>
             </span>
 
-            {/* Line 3 — Typographic nuances */}
+            {/* Line 3 — Accurate Positioning: EDITING, MOTION and VISUAL */}
             <span className={styles.lineWrap}>
               <span className={`${styles.line} ${styles.line3}`}>
-                <span className={styles.wordOutline}>DESIGN</span>,{' '}
-                <span className={styles.wordEmphasis}>EDITING</span> and{' '}
+                <span className={styles.wordOutline}>EDITING</span>,{' '}
+                <span className={styles.wordEmphasis}>MOTION</span> and{' '}
                 <span className={styles.wordOutline}>VISUAL</span>
               </span>
             </span>
@@ -182,11 +182,11 @@ export function Identity({ isFirstSection = false }) {
             <span className={styles.metaValue}>Murari</span>
           </div>
           <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Aka</span>
+            <span className={styles.metaLabel}>Alias</span>
             <span className={styles.metaValue}>Pandu</span>
           </div>
           <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Screen Name</span>
+            <span className={styles.metaLabel}>Studio</span>
             <span className={styles.metaValue}>Fallen Hair</span>
           </div>
         </div>

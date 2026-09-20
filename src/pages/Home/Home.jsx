@@ -11,8 +11,7 @@ import styles from './Home.module.css';
 export function Home() {
   return (
     <div className={styles.home}>
-      {/* Continuous Full-Page Atmosphere & Grain */}
-      <div className={styles.filmGrain} aria-hidden="true" />
+      {/* Continuous Full-Page Atmosphere */}
       <div className={styles.pageAtmosphere} aria-hidden="true">
         <div className={styles.ambientLighting} />
       </div>

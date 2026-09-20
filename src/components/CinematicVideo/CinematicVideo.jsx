@@ -277,7 +277,7 @@ export function CinematicVideo({
           </div>
 
           <span className={styles.roleTag}>
-            {role} // {discipline}
+            {context ? `${context} · ` : ''}{role} // {discipline}
           </span>
         </div>
 

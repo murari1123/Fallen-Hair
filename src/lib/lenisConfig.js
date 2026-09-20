@@ -4,11 +4,11 @@
    ============================================ */
 
 export const lenisOptions = {
-  lerp: 0.1,
-  duration: 1.2,
+  lerp: 0.085,
   smoothWheel: true,
   syncTouch: false,
-  touchMultiplier: 2,
-  wheelMultiplier: 1,
+  wheelMultiplier: 0.9,
+  touchMultiplier: 1,
   infinite: false,
+  autoRaf: false,
 };

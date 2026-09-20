@@ -220,7 +220,7 @@ export function SpatialPortfolio({
     });
 
     addTextPlane({
-      lines: ['MURARI — PANDU', 'DESIGN · EDITING · PHOTOGRAPHY'],
+      lines: ['MURARI — PANDU', 'EDITING · MOTION · VISUAL STORYTELLING'],
       fontSize: 36,
       fontWeight: '300',
       color: '#aaaaaa',
@@ -256,7 +256,7 @@ export function SpatialPortfolio({
       lines: [
         'A CREATIVE mind working',
         'at the intersection of',
-        'DESIGN, EDITING and VISUAL',
+        'EDITING, MOTION and VISUAL',
         'STORYTELLING.',
       ],
       fontSize: 48,
