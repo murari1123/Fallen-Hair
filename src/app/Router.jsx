@@ -3,16 +3,23 @@
    Lightweight, robust client-side routing.
    ============================================ */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Home } from '@/pages/Home/Home';
-import { Work } from '@/pages/Work/Work';
-import { Workspace } from '@/pages/Workspace/Workspace';
-import { Photography } from '@/pages/Photography/Photography';
-import { About } from '@/pages/About/About';
-import { Contact } from '@/pages/Contact/Contact';
-import { JigsAdmin } from '@/pages/JigsAdmin/JigsAdmin';
 import { ScrollTrigger } from '@/lib/gsapConfig';
 import { normalizeRoute, navigate } from '@/lib/navigation';
+import styles from './Router.module.css';
+
+// Lazy-loaded routes for performance code-splitting
+const Work = lazy(() => import('@/pages/Work/Work').then(m => ({ default: m.Work })));
+const Workspace = lazy(() => import('@/pages/Workspace/Workspace').then(m => ({ default: m.Workspace })));
+const Photography = lazy(() => import('@/pages/Photography/Photography').then(m => ({ default: m.Photography })));
+const About = lazy(() => import('@/pages/About/About').then(m => ({ default: m.About })));
+const Contact = lazy(() => import('@/pages/Contact/Contact').then(m => ({ default: m.Contact })));
+const JigsAdmin = lazy(() => import('@/pages/JigsAdmin/JigsAdmin').then(m => ({ default: m.JigsAdmin })));
+
+function RouteFallback() {
+  return <div className={styles.routeFallback} aria-hidden="true" />;
+}
 
 export function Router() {
   const [path, setPath] = useState(() => normalizeRoute(window.location.pathname));
@@ -51,21 +58,29 @@ export function Router() {
 
   const route = normalizeRoute(path);
 
-  switch (route) {
-    case '/jigs-admin':
-      return <JigsAdmin />;
-    case '/workspace':
-      return <Workspace />;
-    case '/work':
-      return <Work />;
-    case '/photography':
-      return <Photography />;
-    case '/about':
-      return <About />;
-    case '/contact':
-      return <Contact />;
-    case '/':
-    default:
-      return <Home />;
-  }
+  const renderRoute = () => {
+    switch (route) {
+      case '/jigs-admin':
+        return <JigsAdmin />;
+      case '/workspace':
+        return <Workspace />;
+      case '/work':
+        return <Work />;
+      case '/photography':
+        return <Photography />;
+      case '/about':
+        return <About />;
+      case '/contact':
+        return <Contact />;
+      case '/':
+      default:
+        return <Home />;
+    }
+  };
+
+  return (
+    <Suspense fallback={<RouteFallback />}>
+      {renderRoute()}
+    </Suspense>
+  );
 }

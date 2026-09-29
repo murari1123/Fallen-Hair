@@ -1,0 +1,12 @@
+/* ============================================
+   FALLEN HAIR — Router Fallback
+   Restrained theme-background placeholder during
+   asynchronous route chunk loading.
+   Zero spinners, zero layout shift.
+   ============================================ */
+
+.routeFallback {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+}
