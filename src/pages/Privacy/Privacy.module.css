@@ -1,0 +1,210 @@
+/* ============================================
+   FALLEN HAIR — Privacy Policy Styles
+   Palette: #F1ECE6 (Ivory) · #202020 (Near-Black) · #6F6A65 (Warm Grey) · #7D4047 (Burgundy) · #D8D1C8 (Borders)
+   ============================================ */
+
+.privacyPage {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: #F1ECE6;
+  color: #202020;
+  padding-top: var(--space-28);
+  padding-bottom: var(--space-32);
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Eyebrow Row */
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid #D8D1C8;
+  margin-bottom: var(--space-16);
+}
+
+.eyebrowLeft {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.plusMark {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: #7D4047;
+  line-height: 1;
+  font-weight: var(--weight-bold);
+}
+
+.eyebrowText {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: #6F6A65;
+}
+
+.eyebrowRight {
+  display: inline-flex;
+  align-items: center;
+}
+
+.archivalCode {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  color: #8E8780;
+  text-transform: uppercase;
+}
+
+/* Content Layout */
+.contentLayout {
+  max-width: 800px;
+  margin-bottom: var(--space-24);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 4.6vw, 4.5rem);
+  font-weight: var(--weight-light);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: #202020;
+  margin-bottom: var(--space-12);
+}
+
+.accentDot {
+  color: #7D4047;
+  display: inline-block;
+  font-weight: var(--weight-normal);
+}
+
+.contentBlock {
+  margin-bottom: var(--space-12);
+}
+
+.subheading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: var(--weight-regular);
+  color: #202020;
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.01em;
+}
+
+.bodyParagraph {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 0.85vw + 0.35rem, 1.0625rem);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
+  color: #4a4642;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-4);
+}
+
+.list {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 0.85vw + 0.35rem, 1.0625rem);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
+  color: #4a4642;
+  letter-spacing: -0.01em;
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+  list-style-type: disc;
+}
+
+.list li {
+  margin-bottom: var(--space-2);
+}
+
+.highlight {
+  display: inline-block;
+  background-color: #fce8e8;
+  color: #7D4047;
+  padding: 0 var(--space-2);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+  margin-right: var(--space-2);
+}
+
+/* Metadata Bar */
+.metaBar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: 1px solid #D8D1C8;
+  margin-top: var(--space-8);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: #8E8780;
+}
+
+.metaValue {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: #202020;
+}
+
+/* Responsive */
+@media (max-width: 840px) {
+  .privacyPage {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+  }
+
+  .eyebrowRow {
+    margin-bottom: var(--space-10);
+  }
+
+  .heading {
+    font-size: clamp(2rem, 7.5vw, 3.25rem);
+    margin-bottom: var(--space-8);
+  }
+
+  .metaBar {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+}
+
+@media (max-width: 480px) {
+  .privacyPage {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .eyebrowRight {
+    display: none;
+  }
+}

@@ -101,13 +101,23 @@
 }
 
 .copyright,
-.credit {
+.credit,
+.legalLink {
   font-family: var(--font-body);
   font-size: var(--text-xs);
   font-weight: var(--weight-regular);
   letter-spacing: var(--tracking-wide);
   color: var(--muted);
   text-transform: uppercase;
+}
+
+.legalLink {
+  text-decoration: none;
+  transition: color 220ms var(--ease-out);
+}
+
+.legalLink:hover {
+  color: var(--charcoal);
 }
 
 /* ---- Responsive ---- */

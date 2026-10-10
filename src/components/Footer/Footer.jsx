@@ -43,6 +43,9 @@ export function Footer() {
           <span className={styles.copyright}>
             © {year} Fallen Hair. All rights reserved.
           </span>
+          <a href="/privacy" className={styles.legalLink}>
+            Privacy Policy
+          </a>
           <span className={styles.credit}>
             Murari — Pandu
           </span>

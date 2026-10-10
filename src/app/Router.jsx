@@ -11,6 +11,7 @@ import { Photography } from '@/pages/Photography/Photography';
 import { About } from '@/pages/About/About';
 import { Contact } from '@/pages/Contact/Contact';
 import { JigsAdmin } from '@/pages/JigsAdmin/JigsAdmin';
+import { Privacy } from '@/pages/Privacy/Privacy';
 import { ScrollTrigger } from '@/lib/gsapConfig';
 import { normalizeRoute, navigate } from '@/lib/navigation';
 
@@ -64,6 +65,8 @@ export function Router() {
       return <About />;
     case '/contact':
       return <Contact />;
+    case '/privacy':
+      return <Privacy />;
     case '/':
     default:
       return <Home />;
